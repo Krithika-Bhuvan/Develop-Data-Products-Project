@@ -1,0 +1,52 @@
+Developing Data Products Project 
+========================================================
+author: KB
+date: `r format(Sys.Date(), format="%B %d %Y")`
+transition: fade
+css: Project.css
+
+Background
+========================================================
+- **Alzheimer's disease** is a progressive disease that destroys memory and other importnat mental functions 
+- It is currenty tanked as the sixth lading cause of death in the United states, and has recently grown to the third leading cause of death behind **heart disease** and **cancer**. 
+- More than 3 million people in the US are diagnosed with this disase evert year. It mostly affects people 60 years and older
+- No cure exists, and medications may temporarily improve symptoms
+- Researchers are looking for not only new ways to treat Alzheimer's, but also better understand the disease mechanism. This will help in developing early detection and prevention.
+
+About the dataset
+========================================================
+
+- The dataset used in this project is the Alzheimers data from the **AppliedPredictiveModeling** package in R
+- It consists of 333 patients (rows) and 130 predictors as columns. 127 of these predictors are **genes** and the values in each cell is the expression of a gene (in the  cerebrospinal fluid (CSF)) for a particular patient. 
+- There is a **Diagnosis** column that can have either of the two values: **Impaired** or **Control**.  Each patient has one of these two values. 
+
+A screen shot of the data is shown below:
+![Image](image.png)
+
+Exploratory analysis 
+========================================================
+<small>Shown in the image below is a heatmap of the correlation matrix (it is symmetric) of all the predictors (genes) in this dataset. This shows a quick overview of which genes are highly correlated.</small>
+```{r, echo=FALSE}
+library(AppliedPredictiveModeling)
+data(AlzheimerDisease)
+adData = data.frame(diagnosis,predictors) 
+
+predictors1<- sapply(predictors, as.numeric) #Create a numeric data frame
+M <- cor(predictors1) #correlation matrix
+
+#plot heatmap of correlation matrix (corrplot was to messy)
+col<- colorRampPalette(c("blue", "white", "red"))(20)
+heatmap(x = M, col=col, symm = TRUE) #NOTE THAT this is a symmetric heatmap
+```
+
+About the shiny app
+========================================================
+
+* The shiny app allows exploration of the Alzheimers data to compare expression of any two genes using correlation plots and correlation test. 
+* The app also provides a bar plot that shows median expression of two genes of interest in the Control and Impaired groups. 
+    - **Why is this important ?** A significant difference in the expression of a gene between the two groups could give a scientist more insights into biology and mechanisms behind development of Alzheimer's disease.
+* Shiny app: https://krithikab.shinyapps.io/Rproj_DevDataProd
+
+### References
+- <small>Wikipedia: https://en.wikipedia.org/wiki/Alzheimer%27s_disease </small>
+- <small>Alzheimer's Association: http://www.alz.org/ </small>
