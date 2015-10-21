@@ -25,20 +25,19 @@ A screen shot of the data is shown below:
 
 Exploratory analysis 
 ========================================================
-<small>Shown in the image below is a heatmap of the correlation matrix (it is symmetric) of all the predictors (genes) in this dataset. This shows a quick overview of which genes are highly correlated.</small>
+<small>Shown in the image below is a heatmap of the correlation matrix (it is symmetric) of all the predictors (genes) in this dataset. This shows a quick overview of which genes are highly correlated. The R code for this is not shown because the image is large sized. </small>
+<small> 
 ```{r, echo=FALSE}
 library(AppliedPredictiveModeling)
 data(AlzheimerDisease)
 adData = data.frame(diagnosis,predictors) 
-
 predictors1<- sapply(predictors, as.numeric) #Create a numeric data frame
 M <- cor(predictors1) #correlation matrix
-
-#plot heatmap of correlation matrix (corrplot was to messy)
+#plot heatmap of correlation matrix (corrplot was to messy), #NOTE THAT IT IS A SYMM HEATMAP
 col<- colorRampPalette(c("blue", "white", "red"))(20)
-heatmap(x = M, col=col, symm = TRUE) #NOTE THAT this is a symmetric heatmap
+heatmap(x = M, col=col, symm = TRUE) 
 ```
-
+</small>
 About the shiny app
 ========================================================
 
